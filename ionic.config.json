@@ -1,0 +1,7 @@
+{
+  "name": "erp_dental_care",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
