@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TabsPage } from './tabs.page';
-import { HomeAComponent } from '../pages/admin/home-a/home-a.component';
+import { TabsPatientPage } from './tabsPatient.page';
+import { HomePComponent } from '../pages/patient/home-p/home-p.component';
 
 const routes: Routes = [
   {
     path: 'tabs',
-    component: TabsPage,
+    component: TabsPatientPage,
     children: [
       {
         path: 'tab1',
-        component: HomeAComponent
+        component: HomePComponent
       },
       {
         path: 'tab2',
-        component: HomeAComponent
+        component: HomePComponent
       },
       {
         path: 'tab3',
-        component: HomeAComponent
+        component: HomePComponent
       },
       {
         path: '',
@@ -33,4 +33,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPatientPageRoutingModule {}
