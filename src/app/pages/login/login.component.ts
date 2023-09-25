@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent  implements OnInit {
 
-  constructor() { }
+  constructor(public api: ApiService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.api.getTaxesRegime().subscribe((e)=>console.log(e)
+    );
+    
+  }
 
 }
