@@ -1,5 +1,7 @@
+import { Person } from "./person";
+import { User } from "./user";
 
-  interface Dentist {
+  export interface Dentist {
     person: Person;
     user: User;
     professional_license: string;
@@ -13,8 +15,7 @@
     frequency_id: number;
     diplomas: Diploma[];
   }
-
-  interface Diploma {
+export interface Diploma {
     name: string;
     university: string;
   }

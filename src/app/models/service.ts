@@ -1,5 +1,6 @@
+import { Supply } from "./supply";
 
-  interface Service {
+export interface Service {
     name: string;
     price: number;
     supplies: Supply[];

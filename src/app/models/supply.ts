@@ -1,4 +1,4 @@
-interface Supply {
+export interface Supply {
     name: string;
     cost: number;
     price: number;

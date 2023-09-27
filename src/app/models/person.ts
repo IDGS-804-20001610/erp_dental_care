@@ -1,4 +1,4 @@
-interface Person {
+export interface Person {
     name: string;
     surname: string;
     lastname: string;
