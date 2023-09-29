@@ -161,9 +161,5 @@ export class PatientsComponent implements OnInit {
       this.presentingElement = document.querySelector('.ion-page');
     }
   
-    onTermsChanged(event: Event) {
-      const ev = event as CheckboxCustomEvent;
-      this.canDismiss = ev.detail.checked;
-    }
 
 }
