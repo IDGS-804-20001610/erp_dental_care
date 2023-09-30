@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { CheckboxCustomEvent } from '@ionic/angular';
+import { MaskitoElementPredicateAsync, MaskitoOptions } from '@maskito/core';
+import { ApiService } from 'src/app/services/api.service';
 
 
 @Component({
@@ -8,8 +11,15 @@ import { CheckboxCustomEvent } from '@ionic/angular';
   styleUrls: ['./patients.component.scss'],
 })
 export class PatientsComponent implements OnInit {
-  data: any[]; 
-  constructor() { this.data = [
+
+  constructor(private formBuilder: FormBuilder, private api: ApiService) {
+    let fechaActual = new Date();
+
+    fechaActual.setFullYear(fechaActual.getFullYear() - 5);
+
+    this.maxDate = fechaActual;
+
+    this.data = [
       {
         person: {
           name: 'Juan'
@@ -150,16 +160,56 @@ export class PatientsComponent implements OnInit {
           name: 'Juan'
         }]
       }
-    ]}
+    ]
+  }
+
+  data: any[];
+  maxDate: Date;
+  patientForm = this.formBuilder.group({
+    name: '',
+    surname: '',
+    lastname: '',
+    birthday: '',
+    sex: '',
+    address: '',
+    cp: '',
+    phone: '',
+    email: '',
+    password: '',
+    valid: false
+  });
+
+  canDismiss = false;
+
+  presentingElement: any = null;
+
+  ngOnInit() {
+    this.presentingElement = document.querySelector('.ion-page');
+  }
+
+  onSubmit() {
+    this.api.insertPatients(this.patientForm.value).subscribe(
+      (response)=> console.log(response)
+    );
+    // this.patientForm.reset();
+  }
 
 
-    canDismiss = false;
+  readonly phoneMask: MaskitoOptions = {
+    mask: [/\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+  };
 
-    presentingElement:any = null;
-  
-    ngOnInit() {
-      this.presentingElement = document.querySelector('.ion-page');
-    }
-  
+  readonly cardMask: MaskitoOptions = {
+    mask: [
+      ...Array(3).fill(/\d/),
+      ' ',
+      ...Array(3).fill(/\d/),
+      ' ',
+      ...Array(4).fill(/\d/),
+    ],
+  };
+
+  readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
+
 
 }
