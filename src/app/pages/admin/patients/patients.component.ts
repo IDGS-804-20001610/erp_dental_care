@@ -18,182 +18,57 @@ export class PatientsComponent implements OnInit {
     fechaActual.setFullYear(fechaActual.getFullYear() - 5);
 
     this.maxDate = fechaActual;
-
-    this.data = [
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      },
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      },
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      },
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      },
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      },
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      },
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      },
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      },
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      },
-      {
-        person: {
-          name: 'Juan'
-        },
-        user: {
-          name: 'Juan'
-        },
-        allergies: [{
-          name: 'Juan'
-        },
-        {
-          name: 'Juan'
-        }]
-      }
-    ]
   }
 
-  data: any[];
+  data: any[] = [];
+  patient: any = null
   maxDate: Date;
+
   patientForm = this.formBuilder.group({
-    name: '',
-    surname: '',
-    lastname: '',
-    birthday: '',
-    sex: '',
-    address: '',
-    cp: '',
-    phone: '',
-    email: '',
-    password: '',
-    valid: false
+    name: null,
+    surname: null,
+    lastname: null,
+    birthday: null,
+    sex: null,
+    address: null,
+    cp: null,
+    phone: null,
+    email: null,
+    password: null
   });
 
-  canDismiss = false;
-
-  presentingElement: any = null;
-
+ 
   ngOnInit() {
-    this.presentingElement = document.querySelector('.ion-page');
+    this.api.getPatients().subscribe((response)=>{this.data = response});
   }
 
   onSubmit() {
-    this.api.insertPatients(this.patientForm.value).subscribe(
+    this.api.insertPatient(this.patientForm.value).subscribe(
       (response)=> console.log(response)
     );
-    // this.patientForm.reset();
+    this.patientForm.reset();
   }
 
+  getDetails(id: any){
+    this.api.getPatient(id).subscribe((response)=>this.patient= response)
+  }
+  
+  editPatient(id: any){
+    this.api.updatePatient(id, this.patientForm.value).subscribe((response)=>this.patient= response)
+  }
+
+  deletePatient(){
+    this.api.deletePatient(this.patient.id).subscribe((response)=>console.log(response))
+  }
+
+  onWillDismiss(){
+    this.patient=null
+  }
+
+
+
+
+  // Secondary Functions
 
   readonly phoneMask: MaskitoOptions = {
     mask: [/\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],

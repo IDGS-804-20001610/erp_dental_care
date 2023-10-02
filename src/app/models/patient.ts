@@ -2,6 +2,7 @@ import { Person } from "./person";
 import { User } from "./user";
 
 export interface Patient {
+    id?: string;
     person: Person;
     user: User;
     allergies: Allergy[];
@@ -13,6 +14,7 @@ export interface Allergy {
   }
 
   export function createPatient(obj: any){
+
     const person: Person = {
       name: obj.name,
       surname: obj.surname,
@@ -20,11 +22,11 @@ export interface Allergy {
       birthday: obj.birthday,
       rfc: obj.rfc,
       tax_regime_id: obj.tax_regime_id,
-      sex: obj.sex,
+      sex: obj.sex.toLowerCase() === "true" ? true : false,
       address: obj.address,
       cp: obj.cp,
-      latitude: obj.latitude,
-      longitude: obj.longitude,
+      latitude: "000",
+      longitude: "000",
       phone: obj.phone
   };
     const user: User = {
@@ -33,12 +35,7 @@ export interface Allergy {
       image: ''
   };
     const allergies: Allergy[] = 
-      [
-        {
-          id: 0,
-          name: 'Abejas'
-      }
-    ]
+      [ ]
   ;
     
   const patient: Patient = {

@@ -30,17 +30,26 @@ export class ApiService {
     return this.http.get(this.baseUrl + 'patients')
   }
 
-  public getOnePatients(id: string): Observable<any> {
+  public getPatient(id: string): Observable<any> {
     return this.http.get(this.baseUrl + 'patients/' + id)
   }
 
-  public insertPatients(obj: any): Observable<any> {
-    const headers = {
-      'content-type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    }
+  public insertPatient(obj: any): Observable<any> {
+    const headers = { 'content-type': 'application/json'}  
     const body = JSON.stringify(createPatient(obj));
-    return this.http.post(this.baseUrl + 'patients/', body, { 'headers': headers })
+    
+    return this.http.post(this.baseUrl + 'patients', body, {"headers": headers})
+  }
+  
+  public updatePatient(id: string, obj: any): Observable<any> {
+    const headers = { 'content-type': 'application/json'}  
+    const body = JSON.stringify(createPatient(obj));
+    
+    return this.http.put(this.baseUrl + 'patients/'+id, body, {"headers": headers})
+  }
+  
+  public deletePatient(id: any): Observable<any> {
+    return this.http.delete(this.baseUrl + 'patients/'+id)
   }
 
   // ! Services
