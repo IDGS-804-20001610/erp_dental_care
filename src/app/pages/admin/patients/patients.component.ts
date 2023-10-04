@@ -37,32 +37,107 @@ export class PatientsComponent implements OnInit {
     password: null
   });
 
- 
+  patientEditForm = this.formBuilder.group({
+    name: null,
+    surname: null,
+    lastname: null,
+    birthday: null,
+    sex: null,
+    address: null,
+    cp: null,
+    phone: null,
+    email: null
+  });
+
+  modalAdd = false
+  modalDetails = false
+  modalEdit = false
+  modalDelete = false
+
   ngOnInit() {
-    this.api.getPatients().subscribe((response)=>{this.data = response});
+    this.getData();
   }
 
+  getData(){
+    this.api.getPatients().subscribe((response) => { this.data = response });
+  }
+
+  openAdd(){
+    this.modalAdd = true
+  }
   onSubmit() {
     this.api.insertPatient(this.patientForm.value).subscribe(
-      (response)=> console.log(response)
+      (response) => {this.modalAdd = false
+      this.patientForm.reset();
+      this.getData()}
     );
-    this.patientForm.reset();
-  }
-
-  getDetails(id: any){
-    this.api.getPatient(id).subscribe((response)=>this.patient= response)
-  }
-  
-  editPatient(id: any){
-    this.api.updatePatient(id, this.patientForm.value).subscribe((response)=>this.patient= response)
-  }
-
-  deletePatient(){
-    this.api.deletePatient(this.patient.id).subscribe((response)=>console.log(response))
   }
 
   onWillDismiss(){
-    this.patient=null
+    this.modalAdd = false
+    this.modalDetails = false
+    this.modalEdit = false
+    this.modalDelete = false
+  }
+  
+  onSubmitEdit() {
+    this.api.updatePatient(this.patient.id, this.patientForm.value).subscribe(
+      (response) => {this.modalEdit = false}
+    );
+    this.patientEditForm.reset();
+  }
+
+  openDetails(id: any) {
+
+    this.modalDetails = true
+
+    this.api.getPatient(id).subscribe((response) => {
+      this.patient = response;
+    })
+  }
+
+  openEdit(id: any) {
+    this.modalEdit = true
+    this.api.getPatient(id).subscribe((response) => {
+      this.patient = response
+    })
+    if(this.patient!==null){
+      this.patientForm.value.name = this.patient.name
+      this.patientForm.value.surname = this.patient.surname
+      this.patientForm.value.lastname = this.patient.lastname
+      this.patientForm.value.birthday = this.patient.birthday
+      this.patientForm.value.sex = this.patient.sex
+      this.patientForm.value.address = this.patient.address
+      this.patientForm.value.cp = this.patient.cp
+      this.patientForm.value.phone = this.patient.phone
+      this.patientForm.value.email = this.patient.email
+    }
+  }
+
+  openDelete(id: any) {
+    this.modalDelete = true
+    this.api.getPatient(id).subscribe((response) => {
+      this.patient = response
+    })
+  }
+
+  editPatient(id: any) {
+    this.api.updatePatient(id, this.patientForm.value).subscribe(
+      (response) => {
+        this.patient = null
+        this.modalEdit = false
+        this.getData();
+      }
+    )
+  }
+
+  deletePatient() {
+    this.api.deletePatient(this.patient.id).subscribe(
+      (response) => {
+        this.modalDelete = false
+        this.getData();
+      }
+    )
   }
 
 
