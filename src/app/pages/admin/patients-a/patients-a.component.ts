@@ -6,11 +6,11 @@ import { ApiService } from 'src/app/services/api.service';
 
 
 @Component({
-  selector: 'app-patients',
-  templateUrl: './patients.component.html',
-  styleUrls: ['./patients.component.scss'],
+  selector: 'app-patients-a',
+  templateUrl: './patients-a.component.html',
+  styleUrls: ['./patients-a.component.scss'],
 })
-export class PatientsComponent implements OnInit {
+export class PatientsAComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private api: ApiService) {
     let fechaActual = new Date();

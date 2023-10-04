@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { PatientsComponent } from './patients.component';
+import { PatientsAComponent } from './patients-a.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaskitoModule } from '@maskito/angular';
 
@@ -14,7 +14,7 @@ import { MaskitoModule } from '@maskito/angular';
     ReactiveFormsModule,
     MaskitoModule
   ],
-  declarations: [PatientsComponent],
-  exports: [PatientsComponent]
+  declarations: [PatientsAComponent],
+  exports: [PatientsAComponent]
 })
 export class PatientsModule {}
