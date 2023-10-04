@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/login/login.component';
 import './importModules';
 import { TabsPatientPage } from './tabsPatient/tabsPatient.page';
 import { PatientsAComponent } from './pages/admin/patients-a/patients-a.component';
+import { DentistsAComponent } from './pages/admin/dentists-a/dentists-a.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
           { 
             path: 'patients',
             component: PatientsAComponent
+          },
+          { 
+            path: 'dentists',
+            component: DentistsAComponent
           },
         ]
       },

@@ -17,4 +17,4 @@ import { MaskitoModule } from '@maskito/angular';
   declarations: [DentistsAComponent],
   exports: [DentistsAComponent]
 })
-export class DentistsModule {}
+export class DentistsAModule {}
