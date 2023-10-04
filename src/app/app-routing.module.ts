@@ -7,7 +7,7 @@ import { HomePComponent } from './pages/patient/home-p/home-p.component';
 import { LoginComponent } from './pages/login/login.component';
 import './importModules';
 import { TabsPatientPage } from './tabsPatient/tabsPatient.page';
-import { PatientsComponent } from './pages/admin/patients-a/patients-a.component';
+import { PatientsAComponent } from './pages/admin/patients-a/patients-a.component';
 
 const routes: Routes = [
   {
@@ -27,7 +27,7 @@ const routes: Routes = [
           },
           { 
             path: 'patients',
-            component: PatientsComponent
+            component: PatientsAComponent
           },
         ]
       },
