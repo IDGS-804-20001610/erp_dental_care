@@ -5,6 +5,7 @@ import { Allergy, Patient, createPatient } from '../models/patient';
 import { Person } from '../models/person';
 import { User } from '../models/user';
 import { createDentist } from '../models/dentist';
+import { createSupply } from '../models/supply';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,30 @@ export class ApiService {
 
   public getSupplies(): Observable<any> {
     return this.http.get(this.baseUrl + 'supplies')
+  }
+
+  public getSupply(id: string): Observable<any> {
+    return this.http.get(this.baseUrl + 'supplies/' + id)
+  }
+
+  public insertSupply(obj: any): Observable<any> {
+    console.log(obj);
+    
+    const headers = { 'content-type': 'application/json'}  
+    const body = JSON.stringify(createSupply(obj));
+    
+    return this.http.post(this.baseUrl + 'supplies', body, {"headers": headers})
+  }
+  
+  public updateSupply(id: string, obj: any): Observable<any> {
+    const headers = { 'content-type': 'application/json'}  
+    const body = JSON.stringify(createSupply(obj));
+    
+    return this.http.put(this.baseUrl + 'supplies/'+id, body, {"headers": headers})
+  }
+  
+  public deleteSupply(id: any): Observable<any> {
+    return this.http.delete(this.baseUrl + 'supplies/'+id)
   }
 
   // ! Taxes Regime

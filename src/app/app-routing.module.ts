@@ -9,6 +9,7 @@ import './importModules';
 import { TabsPatientPage } from './tabsPatient/tabsPatient.page';
 import { PatientsAComponent } from './pages/admin/patients-a/patients-a.component';
 import { DentistsAComponent } from './pages/admin/dentists-a/dentists-a.component';
+import { SuppliesAComponent } from './pages/admin/supplies-a/supplies-a.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
           { 
             path: 'dentists',
             component: DentistsAComponent
+          },
+          { 
+            path: 'supplies',
+            component: SuppliesAComponent
           },
         ]
       },
