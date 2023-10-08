@@ -21,6 +21,7 @@ export class DentistsAComponent implements OnInit {
   }
 
   data: any[] = [];
+  frequencies: any[] = [];
   dentist: any = null
   maxDateBirth: Date;
   maxDate = new Date();
@@ -41,12 +42,17 @@ export class DentistsAComponent implements OnInit {
     professional_license: null,
     hired_at: null,
     position: null,
-    weekdays: null,
-    start_hour: null,
-    start_minute: null,
-    end_hour: null,
-    end_minute: null,
+    monday: null,
+    tuesday: null,
+    wednesday: null,
+    thursday: null,
+    friday: null,
+    saturday: null,
+    sunday: null,
+    start_time: null,
+    end_time: null,
     frequency_id: null,
+    time: null
   });
 
   dentistEditForm = this.formBuilder.group({
@@ -64,48 +70,64 @@ export class DentistsAComponent implements OnInit {
     professional_license: null,
     hired_at: null,
     position: null,
-    weekdays: null,
+    monday: null,
+    tuesday: null,
+    wednesday: null,
+    thursday: null,
+    friday: null,
+    saturday: null,
+    sunday: null,
+    start_time: null,
+    end_time: null,
     start_hour: null,
     start_minute: null,
     end_hour: null,
     end_minute: null,
     frequency_id: null,
+    frequency: null,
+    time: null
   });
 
   modalAdd = false
   modalDetails = false
   modalEdit = false
   modalDelete = false
+  maxPL = 6
 
   ngOnInit() {
     this.getData();
+    this.api.getFrequencies().subscribe((response) => { this.frequencies = response });
   }
 
-  getData(){
+  getData() {
     this.api.getDentists().subscribe((response) => { this.data = response });
   }
 
-  openAdd(){
+  openAdd() {
     this.modalAdd = true
   }
+
   onSubmit() {
+ 
     this.api.insertDentist(this.dentistForm.value).subscribe(
-      (response) => {this.modalAdd = false
-      this.dentistForm.reset();
-      this.getData()}
+      (response) => {
+        this.modalAdd = false
+        this.dentistForm.reset();
+        this.getData()
+      }
     );
   }
 
-  onWillDismiss(){
+  onWillDismiss() {
     this.modalAdd = false
     this.modalDetails = false
     this.modalEdit = false
     this.modalDelete = false
   }
-  
+
   onSubmitEdit() {
     this.api.updateDentist(this.dentist.id, this.dentistForm.value).subscribe(
-      (response) => {this.modalEdit = false}
+      (response) => { this.modalEdit = false }
     );
     this.dentistEditForm.reset();
   }
@@ -123,6 +145,7 @@ export class DentistsAComponent implements OnInit {
     this.modalEdit = true
     this.api.getDentist(id).subscribe((response) => {
       this.dentist = response
+      this.dentistEditForm.value.sex = this.dentist.person.sex
     })
     
   }

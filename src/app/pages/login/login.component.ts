@@ -11,8 +11,6 @@ export class LoginComponent  implements OnInit {
   constructor(public api: ApiService) { }
 
   ngOnInit() {
-    this.api.getTaxesRegime().subscribe((e)=>console.log(e)
-    );
     
   }
 

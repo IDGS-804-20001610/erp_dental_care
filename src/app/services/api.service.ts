@@ -22,25 +22,26 @@ export class ApiService {
   }
 
   public getDentist(id: string): Observable<any> {
-    return this.http.get(this.baseUrl + 'patients/' + id)
+    return this.http.get(this.baseUrl + 'dentists/' + id)
   }
 
   public insertDentist(obj: any): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body = JSON.stringify(createDentist(obj));
+    console.log(body);
     
-    return this.http.post(this.baseUrl + 'patients', body, {"headers": headers})
+    return this.http.post(this.baseUrl + 'dentists', body, {"headers": headers})
   }
   
   public updateDentist(id: string, obj: any): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body = JSON.stringify(createDentist(obj));
     
-    return this.http.put(this.baseUrl + 'patients/'+id, body, {"headers": headers})
+    return this.http.put(this.baseUrl + 'dentists/'+id, body, {"headers": headers})
   }
   
   public deleteDentist(id: any): Observable<any> {
-    return this.http.delete(this.baseUrl + 'patients/'+id)
+    return this.http.delete(this.baseUrl + 'dentists/'+id)
   }
 
   // ! Patients
