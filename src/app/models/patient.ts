@@ -15,6 +15,8 @@ export interface Allergy {
 
   export function createPatient(obj: any){
 
+    console.log(obj);
+    
     const person: Person = {
       name: obj.name,
       surname: obj.surname,
@@ -22,7 +24,7 @@ export interface Allergy {
       birthday: obj.birthday,
       rfc: obj.rfc,
       tax_regime_id: obj.tax_regime_id,
-      sex: obj.sex.toLowerCase() === "true" ? true : false,
+      sex: obj.sex,
       address: obj.address,
       cp: obj.cp,
       latitude: "000",

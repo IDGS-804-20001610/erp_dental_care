@@ -63,6 +63,8 @@ export class ApiService {
   }
   
   public updatePatient(id: string, obj: any): Observable<any> {
+    console.log('service',obj);
+    
     const headers = { 'content-type': 'application/json'}  
     const body = JSON.stringify(createPatient(obj));
     
@@ -90,7 +92,6 @@ export class ApiService {
   }
 
   public insertSupply(obj: any): Observable<any> {
-    console.log(obj);
     
     const headers = { 'content-type': 'application/json'}  
     const body = JSON.stringify(createSupply(obj));

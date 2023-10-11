@@ -81,8 +81,12 @@ export class PatientsAComponent implements OnInit {
   }
   
   onSubmitEdit() {
-    this.api.updatePatient(this.patient.id, this.patientForm.value).subscribe(
-      (response) => {this.modalEdit = false}
+    this.api.updatePatient(this.patient.id, this.patientEditForm.value).subscribe(
+      (response) => {
+        this.patient = null
+        this.modalEdit = false
+        this.getData();
+      }
     );
     this.patientEditForm.reset();
   }
@@ -102,15 +106,15 @@ export class PatientsAComponent implements OnInit {
       this.patient = response
     })
     if(this.patient!==null){
-      this.patientForm.value.name = this.patient.name
-      this.patientForm.value.surname = this.patient.surname
-      this.patientForm.value.lastname = this.patient.lastname
-      this.patientForm.value.birthday = this.patient.birthday
-      this.patientForm.value.sex = this.patient.sex
-      this.patientForm.value.address = this.patient.address
-      this.patientForm.value.cp = this.patient.cp
-      this.patientForm.value.phone = this.patient.phone
-      this.patientForm.value.email = this.patient.email
+      this.patientEditForm.value.name = this.patient.name
+      this.patientEditForm.value.surname = this.patient.surname
+      this.patientEditForm.value.lastname = this.patient.lastname
+      this.patientEditForm.value.birthday = this.patient.birthday
+      this.patientEditForm.value.sex = this.patient.sex
+      this.patientEditForm.value.address = this.patient.address
+      this.patientEditForm.value.cp = this.patient.cp
+      this.patientEditForm.value.phone = this.patient.phone
+      this.patientEditForm.value.email = this.patient.email
     }
   }
 
@@ -121,15 +125,7 @@ export class PatientsAComponent implements OnInit {
     })
   }
 
-  editPatient(id: any) {
-    this.api.updatePatient(id, this.patientForm.value).subscribe(
-      (response) => {
-        this.patient = null
-        this.modalEdit = false
-        this.getData();
-      }
-    )
-  }
+
 
   deletePatient() {
     this.api.deletePatient(this.patient.id).subscribe(
