@@ -76,8 +76,14 @@ export class SuppliesAComponent implements OnInit {
   }
 
   onSubmitEdit() {
-    this.api.updateSupply(this.supply.id, this.supplyForm.value).subscribe(
-      (response) => { this.modalEdit = false }
+    console.log(this.supplyEditForm.value);
+    
+    this.api.updateSupply(this.supply.id, this.supplyEditForm.value).subscribe(
+      (response) => { 
+        this.supply = null
+        this.modalEdit = false
+        this.getData();
+      }
     );
     this.supplyEditForm.reset();
   }
@@ -95,9 +101,8 @@ export class SuppliesAComponent implements OnInit {
     this.modalEdit = true
     this.api.getSupply(id).subscribe((response) => {
       this.supply = response
-      console.log(this.supply);
-      
       this.supplyEditForm.value.is_salable = this.supply.is_salable
+      this.supplyEditForm.value.equivalence = this.supply.equivalence
     })
     
   }
@@ -109,15 +114,6 @@ export class SuppliesAComponent implements OnInit {
     })
   }
 
-  editSupply(id: any) {
-    this.api.updateSupply(id, this.supplyForm.value).subscribe(
-      (response) => {
-        this.supply = null
-        this.modalEdit = false
-        this.getData();
-      }
-    )
-  }
 
   deleteSupply() {
     this.api.deleteSupply(this.supply.id).subscribe(

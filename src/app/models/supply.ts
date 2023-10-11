@@ -15,10 +15,10 @@ export function createSupply(obj: any) {
     name: obj.name,
     cost: obj.cost,
     price: obj.price,
-    is_salable: obj.is_salable.toLowerCase() === "true" ? true : false,
+    is_salable: obj.is_salable,
     buy_unit: obj.buy_unit,
     use_unit: obj.use_unit,
-    equivalence: obj.name,
+    equivalence: obj.equivalence,
     image: '',
   };
   return supply

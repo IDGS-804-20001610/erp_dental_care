@@ -175,10 +175,10 @@
                         <ion-label>Es vendible:</ion-label>
                         <ion-row>
                           <ion-col>
-                            <ion-radio value=true>Si</ion-radio>
+                            <ion-radio [value]=true>Si</ion-radio>
                           </ion-col>
                           <ion-col>
-                            <ion-radio value=false>No</ion-radio>
+                            <ion-radio [value]=false>No</ion-radio>
                           </ion-col>
                         </ion-row>
                       </ion-radio-group>
@@ -212,7 +212,7 @@
     <!-- End Modal Add Supply -->
 
 
-    <!-- Start Delete Details Supply -->
+    <!-- Start Details Supply -->
     <ion-modal [isOpen]="modalDetails" (willDismiss)="onWillDismiss()">
       <ng-template>
         <ion-header>
@@ -234,7 +234,7 @@
             <ion-card-content>
               Costo: {{supply.cost}} <br>
               Precio: {{supply.price}} <br>
-              Es vendible: {{supply.is_vendible == true ? "Si" : "No" }} <br>
+              Es vendible: {{supply.is_salable == true ? "Si" : "No" }} <br>
               Unidad de compra: {{supply.buy_unit}} <br>
               Unidad de uso: {{supply.use_unit}} <br>
               Equivalencia: {{supply.equivalence}} <br><br>
@@ -284,10 +284,10 @@
                         <ion-label>Es vendible:</ion-label>
                         <ion-row>
                           <ion-col>
-                            <ion-radio [value]="true">Si</ion-radio>
+                            <ion-radio [value]=true>Si</ion-radio>
                           </ion-col>
                           <ion-col>
-                            <ion-radio [value]="false">No</ion-radio>
+                            <ion-radio [value]=false>No</ion-radio>
                           </ion-col>
                         </ion-row>
                       </ion-radio-group>
