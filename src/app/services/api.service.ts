@@ -62,9 +62,7 @@ export class ApiService {
     return this.http.post(this.baseUrl + 'patients', body, {"headers": headers})
   }
   
-  public updatePatient(id: string, obj: any): Observable<any> {
-    console.log('service',obj);
-    
+  public updatePatient(id: string, obj: any): Observable<any> {    
     const headers = { 'content-type': 'application/json'}  
     const body = JSON.stringify(createPatient(obj));
     

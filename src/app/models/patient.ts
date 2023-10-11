@@ -14,9 +14,6 @@ export interface Allergy {
   }
 
   export function createPatient(obj: any){
-
-    console.log(obj);
-    
     const person: Person = {
       name: obj.name,
       surname: obj.surname,
