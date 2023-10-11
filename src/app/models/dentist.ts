@@ -30,7 +30,7 @@ export function createDentist(obj: any) {
     lastname: obj.lastname,
     birthday: obj.birthday,
     rfc: obj.rfc,
-    tax_regime_id: obj.tax_regime_id,
+    tax_regime_id: 1,
     sex: obj.sex,
     address: obj.address,
     cp: obj.cp,
