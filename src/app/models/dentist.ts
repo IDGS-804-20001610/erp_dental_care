@@ -31,7 +31,7 @@ export function createDentist(obj: any) {
     birthday: obj.birthday,
     rfc: obj.rfc,
     tax_regime_id: obj.tax_regime_id,
-    sex: obj.sex.toLowerCase() === "true" ? true : false,
+    sex: obj.sex,
     address: obj.address,
     cp: obj.cp,
     latitude: "000",

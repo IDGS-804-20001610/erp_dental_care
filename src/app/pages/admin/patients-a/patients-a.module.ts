@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { PatientsAComponent } from './patients-a.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaskitoModule } from '@maskito/angular';
+import { VerticalMenuAdminModule } from 'src/app/components/vertical-menu-admin/vertical-menu-admin.module';
 
 
 
@@ -12,7 +13,8 @@ import { MaskitoModule } from '@maskito/angular';
     IonicModule,
     CommonModule,
     ReactiveFormsModule,
-    MaskitoModule
+    MaskitoModule,
+    VerticalMenuAdminModule
   ],
   declarations: [PatientsAComponent],
   exports: [PatientsAComponent]
