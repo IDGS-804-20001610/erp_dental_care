@@ -6,3 +6,11 @@ export interface Service {
     supplies: Supply[];
   }
   
+  export function createService(obj:any){
+    let service: Service = {
+      name: obj.name,
+      price: obj.price,
+      supplies: []
+  };
+    return service;
+  }

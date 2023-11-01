@@ -2,16 +2,23 @@
   <div style="margin: 5% 20% 0 20%;">
     <ion-img class="logo" src="../assets/logo-no-background.png" alt="AzTech"></ion-img>
     <br>
-    <ion-item>
-      <ion-input type="email" label="Email" labelPlacement="floating" helperText="Enter a valid email"
-        errorText="Invalid email" ngModel email></ion-input>
-    </ion-item>
-    <br>
-    <ion-item>
-      <ion-input label="Password input" type="password" value="password"></ion-input>
-    </ion-item>
-    <br>
-    <ion-button expand="block" color="dark" href="/pages/admin/patients">Login</ion-button>
+    <form (ngSubmit)="onSubmitLogin()" [formGroup]="loginForm">
+      <ion-list class="ion-margin">
+        <ion-item>
+          <ion-input [(ngModel)]="login.email" formControlName="email" type="email" label="Email" labelPlacement="floating" helperText="Enter a valid email"
+          errorText="Invalid email" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input [(ngModel)]="login.password" formControlName="password" label="Password" type="password"></ion-input>
+        </ion-item>
+
+      </ion-list>
+      <ion-button expand="block" color="dark" type="submit"
+        [disabled]="!loginForm.valid">
+        Iniciar Sesión <ion-icon slot="end" name="save"></ion-icon>
+      </ion-button>
+    </form>
+
   </div>
 
   <ion-img class="water-mark" src="../assets/logo-no-background.png" alt="AzTech"></ion-img>

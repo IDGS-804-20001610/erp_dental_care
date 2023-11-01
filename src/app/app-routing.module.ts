@@ -10,6 +10,9 @@ import { TabsPatientPage } from './tabsPatient/tabsPatient.page';
 import { PatientsAComponent } from './pages/admin/patients-a/patients-a.component';
 import { DentistsAComponent } from './pages/admin/dentists-a/dentists-a.component';
 import { SuppliesAComponent } from './pages/admin/supplies-a/supplies-a.component';
+import { ServicesAComponent } from './pages/admin/services-a/services-a.component';
+import { Roles } from './models/roles';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -25,19 +28,33 @@ const routes: Routes = [
         children: [
           { 
             path: 'home',
-            component: HomeAComponent
+            component: HomeAComponent,
+            canActivate : [AuthGuard],
+        data: { roles: [Roles.Admin]}
           },
           { 
             path: 'patients',
-            component: PatientsAComponent
+            component: PatientsAComponent,
+            canActivate : [AuthGuard],
+        data: { roles: [Roles.Admin]}
           },
           { 
             path: 'dentists',
-            component: DentistsAComponent
+            component: DentistsAComponent,
+            canActivate : [AuthGuard],
+        data: { roles: [Roles.Admin]}
           },
           { 
             path: 'supplies',
-            component: SuppliesAComponent
+            component: SuppliesAComponent,
+            canActivate : [AuthGuard],
+        data: { roles: [Roles.Admin]}
+          },
+          { 
+            path: 'services',
+            component: ServicesAComponent,
+            canActivate : [AuthGuard],
+        data: { roles: [Roles.Admin]}
           },
         ]
       },
@@ -47,7 +64,9 @@ const routes: Routes = [
         children: [
           { 
             path: 'home',
-            component: HomeDComponent
+            component: HomeDComponent,
+            canActivate : [AuthGuard],
+        data: { roles: [Roles.Dentist]}
           },
         ]
       },
@@ -72,9 +91,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
