@@ -17,13 +17,13 @@ export class ApiService {
   private headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${localStorage.getItem('token')}`
-  } 
+  }
 
   constructor(public http: HttpClient) { }
 
   //  ! Login
 
-  public login(obj: any): Observable<any>{
+  public login(obj: any): Observable<any> {
     const body = {
       "email": obj.email,
       "password": obj.password
@@ -34,132 +34,171 @@ export class ApiService {
   // ! Dentists
 
   public getDentists(): Observable<any> {
-    
-    return this.http.get(this.baseUrl + 'dentists',{'headers':this.headers})
+
+    return this.http.get(this.baseUrl + 'dentists', { 'headers': this.headers })
   }
 
   public getDentist(id: string): Observable<any> {
-    return this.http.get(this.baseUrl + 'dentists/' + id,{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'dentists/' + id, { 'headers': this.headers })
   }
 
   public insertDentist(obj: any): Observable<any> {
     const body = JSON.stringify(createDentist(obj));
     console.log(body);
-    
-    return this.http.post(this.baseUrl + 'dentists', body, {"headers": this.headers})
+
+    return this.http.post(this.baseUrl + 'dentists', body, { "headers": this.headers })
   }
-  
+
   public updateDentist(id: string, obj: any): Observable<any> {
     const body = JSON.stringify(createDentist(obj));
-    
-    return this.http.put(this.baseUrl + 'dentists/'+id, body, {"headers": this.headers})
+
+    return this.http.put(this.baseUrl + 'dentists/' + id, body, { "headers": this.headers })
   }
-  
+
   public deleteDentist(id: any): Observable<any> {
-    return this.http.delete(this.baseUrl + 'dentists/'+id,{'headers':this.headers})
+    return this.http.delete(this.baseUrl + 'dentists/' + id, { 'headers': this.headers })
   }
 
   // ! Patients
 
   public getPatients(): Observable<any> {
-    return this.http.get(this.baseUrl + 'patients',{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'patients', { 'headers': this.headers })
   }
 
   public getPatient(id: string): Observable<any> {
-    return this.http.get(this.baseUrl + 'patients/' + id,{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'patients/' + id, { 'headers': this.headers })
   }
 
   public insertPatient(obj: any): Observable<any> {
     const body = JSON.stringify(createPatient(obj));
-    
-    return this.http.post(this.baseUrl + 'patients', body, {"headers": this.headers})
+
+    return this.http.post(this.baseUrl + 'patients', body, { "headers": this.headers })
   }
-  
-  public updatePatient(id: string, obj: any): Observable<any> {    
+
+  public updatePatient(id: string, obj: any): Observable<any> {
     const body = JSON.stringify(createPatient(obj));
-    
-    return this.http.put(this.baseUrl + 'patients/'+id, body, {"headers": this.headers})
+
+    return this.http.put(this.baseUrl + 'patients/' + id, body, { "headers": this.headers })
   }
-  
+
   public deletePatient(id: any): Observable<any> {
-    return this.http.delete(this.baseUrl + 'patients/'+id,{'headers':this.headers})
+    return this.http.delete(this.baseUrl + 'patients/' + id, { 'headers': this.headers })
   }
 
   // ! Services
 
   public getServices(): Observable<any> {
-    return this.http.get(this.baseUrl + 'services',{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'services', { 'headers': this.headers })
   }
 
   public getService(id: string): Observable<any> {
-    return this.http.get(this.baseUrl + 'services/' + id,{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'services/' + id, { 'headers': this.headers })
   }
 
   public insertService(obj: any): Observable<any> {
     const body = JSON.stringify(createService(obj));
-    
-    return this.http.post(this.baseUrl + 'services', body, {"headers": this.headers})
+
+    return this.http.post(this.baseUrl + 'services', body, { "headers": this.headers })
   }
-  
-  public updateService(id: string, obj: any): Observable<any> {    
+
+  public updateService(id: string, obj: any): Observable<any> {
     const body = JSON.stringify(createService(obj));
-    
-    return this.http.put(this.baseUrl + 'services/'+id, body, {"headers": this.headers})
+
+    return this.http.put(this.baseUrl + 'services/' + id, body, { "headers": this.headers })
   }
 
   public deleteService(id: any): Observable<any> {
-    return this.http.delete(this.baseUrl + 'services/'+id,{'headers':this.headers})
+    return this.http.delete(this.baseUrl + 'services/' + id, { 'headers': this.headers })
   }
 
   // ! Supplies
 
   public getSupplies(): Observable<any> {
-    return this.http.get(this.baseUrl + 'supplies',{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'supplies', { 'headers': this.headers })
   }
 
   public getSupply(id: string): Observable<any> {
-    return this.http.get(this.baseUrl + 'supplies/' + id,{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'supplies/' + id, { 'headers': this.headers })
   }
 
   public insertSupply(obj: any): Observable<any> {
-    
+
     const body = JSON.stringify(createSupply(obj));
-    
-    return this.http.post(this.baseUrl + 'supplies', body, {"headers": this.headers})
+
+    return this.http.post(this.baseUrl + 'supplies', body, { "headers": this.headers })
   }
-  
+
   public updateSupply(id: string, obj: any): Observable<any> {
     const body = JSON.stringify(createSupply(obj));
-    
-    return this.http.put(this.baseUrl + 'supplies/'+id, body, {"headers": this.headers})
+
+    return this.http.put(this.baseUrl + 'supplies/' + id, body, { "headers": this.headers })
   }
-  
+
   public deleteSupply(id: any): Observable<any> {
-    return this.http.delete(this.baseUrl + 'supplies/'+id,{'headers':this.headers})
+    return this.http.delete(this.baseUrl + 'supplies/' + id, { 'headers': this.headers })
+  }
+
+  // ! Appointments
+
+  public getAppointments(): Observable<any> {
+
+    const today = new Date();
+    const nextMonth = new Date();
+    nextMonth.setMonth(today.getMonth() + 1);
+
+    const body = {
+      dentist_id: 1,
+      patient_id: 1,
+      start_date: today.toISOString(),
+      end_date: nextMonth.toISOString()
+    };
+
+    return this.http.post(this.baseUrl + 'appointment/list', body, { 'headers': this.headers })
+  }
+
+  public getAppointment(id: string): Observable<any> {
+    return this.http.get(this.baseUrl + 'appointment/' + id, { 'headers': this.headers })
+  }
+
+  public insertAppointment(obj: any): Observable<any> {
+
+    const body = JSON.stringify(obj);
+
+    return this.http.post(this.baseUrl + 'appointment', body, { "headers": this.headers })
+  }
+
+  public updateAppointment(id: string, obj: any): Observable<any> {
+    const body = JSON.stringify(obj);
+
+    return this.http.put(this.baseUrl + 'appointment/' + id, body, { "headers": this.headers })
+  }
+
+  public deleteAppointment(id: any): Observable<any> {
+    return this.http.delete(this.baseUrl + 'appointment/' + id, { 'headers': this.headers })
   }
 
   // ! Taxes Regime
 
   public getTaxesRegime(): Observable<any> {
-    return this.http.get(this.baseUrl + 'get/tax-regime',{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'get/tax-regime', { 'headers': this.headers })
   }
 
   // ! Allergies
 
   public getAllergies(): Observable<any> {
-    return this.http.get(this.baseUrl + 'get/allergies',{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'get/allergies', { 'headers': this.headers })
   }
 
   // ! Frequencies
 
   public getFrequencies(): Observable<any> {
-    return this.http.get(this.baseUrl + 'get/frequencies',{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'get/frequencies', { 'headers': this.headers })
   }
 
   // ! Week days
 
   public getWeekDays(): Observable<any> {
-    return this.http.get(this.baseUrl + 'get/weekdays',{'headers':this.headers})
+    return this.http.get(this.baseUrl + 'get/weekdays', { 'headers': this.headers })
   }
 
 }

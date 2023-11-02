@@ -13,6 +13,7 @@ import { SuppliesAComponent } from './pages/admin/supplies-a/supplies-a.componen
 import { ServicesAComponent } from './pages/admin/services-a/services-a.component';
 import { Roles } from './models/roles';
 import { AuthGuard } from './guards/auth.guard';
+import { AppointmentsAComponent } from './pages/admin/appointments-a/appointments-a.component';
 
 const routes: Routes = [
   {
@@ -26,35 +27,41 @@ const routes: Routes = [
         path: 'admin',
         component: TabsPage,
         children: [
-          { 
+          {
             path: 'home',
             component: HomeAComponent,
-            canActivate : [AuthGuard],
-        data: { roles: [Roles.Admin]}
+            canActivate: [AuthGuard],
+            data: { roles: [Roles.Admin] }
           },
-          { 
+          {
             path: 'patients',
             component: PatientsAComponent,
-            canActivate : [AuthGuard],
-        data: { roles: [Roles.Admin]}
+            canActivate: [AuthGuard],
+            data: { roles: [Roles.Admin] }
           },
-          { 
+          {
             path: 'dentists',
             component: DentistsAComponent,
-            canActivate : [AuthGuard],
-        data: { roles: [Roles.Admin]}
+            canActivate: [AuthGuard],
+            data: { roles: [Roles.Admin] }
           },
-          { 
+          {
             path: 'supplies',
             component: SuppliesAComponent,
-            canActivate : [AuthGuard],
-        data: { roles: [Roles.Admin]}
+            canActivate: [AuthGuard],
+            data: { roles: [Roles.Admin] }
           },
-          { 
+          {
             path: 'services',
             component: ServicesAComponent,
-            canActivate : [AuthGuard],
-        data: { roles: [Roles.Admin]}
+            canActivate: [AuthGuard],
+            data: { roles: [Roles.Admin] }
+          },
+          {
+            path: 'appointments',
+            component: AppointmentsAComponent,
+            canActivate: [AuthGuard],
+            data: { roles: [Roles.Admin] }
           },
         ]
       },
@@ -62,11 +69,11 @@ const routes: Routes = [
         path: 'dentist',
         component: TabsPage,
         children: [
-          { 
+          {
             path: 'home',
             component: HomeDComponent,
-            canActivate : [AuthGuard],
-        data: { roles: [Roles.Dentist]}
+            canActivate: [AuthGuard],
+            data: { roles: [Roles.Dentist] }
           },
         ]
       },
@@ -74,7 +81,7 @@ const routes: Routes = [
         path: 'patient',
         component: TabsPatientPage,
         children: [
-          { 
+          {
             path: 'home',
             component: HomePComponent
           },
@@ -82,7 +89,7 @@ const routes: Routes = [
       },
     ]
   },
-  
+
   {
     path: '',
     redirectTo: 'pages/login',
@@ -94,4 +101,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

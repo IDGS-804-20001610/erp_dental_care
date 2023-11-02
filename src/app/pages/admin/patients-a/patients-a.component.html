@@ -191,12 +191,12 @@
 
               <h1>Alergias:</h1>
               <ion-list *ngIf="patient.allergies.length">
-                <ion-item>
-                  Abejas
+                <ion-item *ngFor="let al of patient.allergies" class="ion-text-capitalize">
+                  {{al.name}}
                 </ion-item>
               </ion-list>
               <ng-template [ngIf]="patient.allergies.length===0">
-                <h2>Sin datos.</h2>
+                <h2>Sin alergias.</h2>
               </ng-template>
               <!-- <br>
               <h1>Citas:</h1>

@@ -59,7 +59,8 @@ export class PatientsAComponent implements OnInit {
   }
 
   getData(){
-    this.api.getPatients().subscribe((response) => { this.data = response });
+    this.api.getPatients().subscribe((response) => { this.data = response, console.log(response);
+     });
   }
 
   openAdd(){
