@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Allergy, Patient, createPatient } from '../models/patient';
-import { Person } from '../models/person';
-import { User } from '../models/user';
+import { Allergy, Patient, createPatient } from '../models/patient'
 import { createDentist } from '../models/dentist';
 import { createSupply } from '../models/supply';
 import { createService } from '../models/service';
@@ -95,19 +93,21 @@ export class ApiService {
     return this.http.get(this.baseUrl + 'services/' + id, { 'headers': this.headers })
   }
 
-  public insertService(obj: any): Observable<any> {
-    const body = JSON.stringify(createService(obj));
+  public insertService(obj: any, supplies:any[]): Observable<any> {
+    const body = JSON.stringify(createService(obj, supplies));
 
     return this.http.post(this.baseUrl + 'services', body, { "headers": this.headers })
   }
 
-  public updateService(id: string, obj: any): Observable<any> {
-    const body = JSON.stringify(createService(obj));
+  public updateService(id: string, obj: any, supplies:any[]): Observable<any> {
+    const body = JSON.stringify(createService(obj, supplies));
 
     return this.http.put(this.baseUrl + 'services/' + id, body, { "headers": this.headers })
   }
 
   public deleteService(id: any): Observable<any> {
+    console.log("jasdlkajsd", id);
+    
     return this.http.delete(this.baseUrl + 'services/' + id, { 'headers': this.headers })
   }
 

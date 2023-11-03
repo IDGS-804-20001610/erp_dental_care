@@ -100,6 +100,28 @@
                     placeholder="Precio"></ion-input>
                 </ion-item>
 
+                <ion-item>
+                  <ion-select
+                    aria-label="Agregar Insumo"
+                    placeholder="Agregar Insumo"
+                    (ionChange)="handleChange($event)"
+                  >
+                  <div *ngFor="let item of supplies">
+                    <ion-select-option [value]="item.id">{{item.name}}</ion-select-option>
+                  </div>
+                  </ion-select>
+                </ion-item>
+                <br>
+                <label *ngIf="suppliesAdded.length">Insumos</label>
+                <ion-item *ngFor="let item of suppliesAdded">
+                      <ion-input [id]="item.supply_id" [label]="supplies[findIndexById(item.supply_id)].name" type="number"
+                      (ionChange)="addQuantity($event, item.supply_id)"
+                    [value]="item.quantity"></ion-input>
+                    <ion-button style="margin-left: 10px;" (click)="removeSupply(item.id)" color="danger"><ion-icon aria-hidden="true"
+                      name="trash"></ion-icon>
+                  </ion-button>
+                </ion-item>
+
               </ion-list>
 
               <ion-button style="margin: 10px 20px 0px 20px;" expand="block" type="submit"
@@ -128,13 +150,21 @@
         <ion-content>
 
           <ion-card *ngIf="service!==null">
-            <img src="https://ionicframework.com/docs/img/demos/card-media.png" />
+          
             <ion-card-header>
               <ion-card-title>{{service.name}}</ion-card-title>
             </ion-card-header>
 
             <ion-card-content>
-              Precio: {{service.price}} <br>
+              Precio: {{service.price}} <br><br>
+              <h2>Insumos:</h2>
+              <ion-list *ngIf="service.supplies.length">
+                <ion-item *ngFor="let supp of service.supplies" class="ion-text-capitalize">
+                  Nombre: {{supp.supply.name}} <br>
+                  Cantidad: {{supp.quantity}} <br>
+                  
+                </ion-item>
+              </ion-list>
             </ion-card-content>
           </ion-card>
 
@@ -169,6 +199,30 @@
                   <ion-input [(ngModel)]="service.price" formControlName="price" label="Precio" type="number"
                     placeholder="Costo de Venta"></ion-input>
                 </ion-item>
+
+                <ion-item>
+                  <ion-select
+                    aria-label="Agregar Insumo"
+                    placeholder="Agregar Insumo"
+                    (ionChange)="handleChange($event)"
+                  >
+                  <div *ngFor="let item of supplies">
+                    <ion-select-option *ngIf="itemExists(item.id)" [value]="item.id">{{item.name}}</ion-select-option>
+                  </div>
+                  </ion-select>
+                </ion-item>
+                <br>
+                <label *ngIf="suppliesAdded.length">Insumos</label>
+                <ion-item *ngFor="let item of suppliesAdded">
+                      <ion-input [id]="item.supply_id"  [label]="supplies[findIndexById(item.supply_id)].name" type="number"
+                      (ionChange)="addQuantity($event, item.supply_id)"
+                    [value]="item.quantity"></ion-input>
+                    <ion-button style="margin-left: 10px;" (click)="removeSupply(item.id)" color="danger"><ion-icon aria-hidden="true"
+                      name="trash"></ion-icon>
+                  </ion-button>
+                </ion-item>
+
+                
 
               </ion-list>
               <ion-button style="margin: 10px 20px 0px 20px;" expand="block" type="submit"
