@@ -42,8 +42,8 @@ export class ServicesAComponent implements OnInit {
   }
 
   getData() {
-    this.api.getServices().subscribe((response) => { this.data = response });
-    this.api.getSupplies().subscribe((response) => { this.supplies = response });
+    this.api.getServices().then((response:any) => { this.data = response.data });
+    this.api.getSupplies().then((response:any) => { this.supplies = response.data });
   }
 
   openAdd() {
@@ -75,8 +75,8 @@ export class ServicesAComponent implements OnInit {
 
   onSubmit() {
 
-    this.api.insertService(this.serviceForm.value, this.suppliesAdded).subscribe(
-      (response) => {
+    this.api.insertService(this.serviceForm.value, this.suppliesAdded).then(
+      (response:any) => {
         this.modalAdd = false
         this.serviceForm.reset();
         this.getData()
@@ -98,16 +98,16 @@ export class ServicesAComponent implements OnInit {
 
     this.modalDetails = true
 
-    this.api.getService(id).subscribe((response) => {
-      this.service = response;
+    this.api.getService(id).then((response:any) => {
+      this.service = response.data;
     })
   }
 
   openEdit(id: any) {
     this.modalEdit = true
-    this.api.getService(id).subscribe((response) => {
+    this.api.getService(id).then((response:any) => {
 
-      this.service = response
+      this.service = response.data
       console.log(response.supplies);
       
       response.supplies.forEach((item: any) => {
@@ -124,8 +124,8 @@ export class ServicesAComponent implements OnInit {
   onSubmitEdit() {
     console.log(this.suppliesAdded);
 
-    this.api.updateService(this.service.id, this.serviceEditForm.value, this.suppliesAdded).subscribe(
-      (response) => {
+    this.api.updateService(this.service.id, this.serviceEditForm.value, this.suppliesAdded).then(
+      (response:any) => {
         this.service = null
         this.modalEdit = false
         this.getData();
@@ -136,15 +136,15 @@ export class ServicesAComponent implements OnInit {
 
   openDelete(id: any) {
     this.modalDelete = true
-    this.api.getService(id).subscribe((response) => {
-      this.service = response
+    this.api.getService(id).then((response:any) => {
+      this.service = response.data
     })
   }
 
 
   deleteService() {
-    this.api.deleteService(this.service.id).subscribe(
-      (response) => {
+    this.api.deleteService(this.service.id).then(
+      (response:any) => {
         this.modalDelete = false
         this.getData();
       }

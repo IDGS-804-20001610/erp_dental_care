@@ -50,7 +50,7 @@ export class SuppliesAComponent implements OnInit {
   }
 
   getData() {
-    this.api.getSupplies().subscribe((response) => { this.data = response });
+    this.api.getSupplies().then((response:any) => { this.data = response.data });
   }
 
   openAdd() {
@@ -59,8 +59,8 @@ export class SuppliesAComponent implements OnInit {
 
   onSubmit() {
  
-    this.api.insertSupply(this.supplyForm.value).subscribe(
-      (response) => {
+    this.api.insertSupply(this.supplyForm.value).then(
+      (response:any) => {
         this.modalAdd = false
         this.supplyForm.reset();
         this.getData()
@@ -78,8 +78,8 @@ export class SuppliesAComponent implements OnInit {
   onSubmitEdit() {
     console.log(this.supplyEditForm.value);
     
-    this.api.updateSupply(this.supply.id, this.supplyEditForm.value).subscribe(
-      (response) => { 
+    this.api.updateSupply(this.supply.id, this.supplyEditForm.value).then(
+      (response:any) => { 
         this.supply = null
         this.modalEdit = false
         this.getData();
@@ -92,15 +92,15 @@ export class SuppliesAComponent implements OnInit {
 
     this.modalDetails = true
 
-    this.api.getSupply(id).subscribe((response) => {
-      this.supply = response;
+    this.api.getSupply(id).then((response:any) => {
+      this.supply = response.data;
     })
   }
 
   openEdit(id: any) {
     this.modalEdit = true
-    this.api.getSupply(id).subscribe((response) => {
-      this.supply = response
+    this.api.getSupply(id).then((response:any) => {
+      this.supply = response.data
       this.supplyEditForm.value.is_salable = this.supply.is_salable
       this.supplyEditForm.value.equivalence = this.supply.equivalence
     })
@@ -109,15 +109,15 @@ export class SuppliesAComponent implements OnInit {
 
   openDelete(id: any) {
     this.modalDelete = true
-    this.api.getSupply(id).subscribe((response) => {
-      this.supply = response
+    this.api.getSupply(id).then((response:any) => {
+      this.supply = response.data
     })
   }
 
 
   deleteSupply() {
-    this.api.deleteSupply(this.supply.id).subscribe(
-      (response) => {
+    this.api.deleteSupply(this.supply.id).then(
+      (response:any) => {
         this.modalDelete = false
         this.getData();
       }

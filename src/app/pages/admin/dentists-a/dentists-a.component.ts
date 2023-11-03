@@ -96,11 +96,11 @@ export class DentistsAComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-    this.api.getFrequencies().subscribe((response) => { this.frequencies = response });
+    this.api.getFrequencies().then((response:any) => { this.frequencies = response.data });
   }
 
   getData() {
-    this.api.getDentists().subscribe((response) => { this.data = response });
+    this.api.getDentists().then((response:any) => { this.data = response.data });
   }
 
   openAdd() {
@@ -109,8 +109,8 @@ export class DentistsAComponent implements OnInit {
 
   onSubmit() {
  
-    this.api.insertDentist(this.dentistForm.value).subscribe(
-      (response) => {
+    this.api.insertDentist(this.dentistForm.value).then(
+      (response:any) => {
         this.modalAdd = false
         this.dentistForm.reset();
         this.getData()
@@ -126,8 +126,8 @@ export class DentistsAComponent implements OnInit {
   }
 
   onSubmitEdit() {
-    this.api.updateDentist(this.dentist.id, this.dentistForm.value).subscribe(
-      (response) => { this.modalEdit = false }
+    this.api.updateDentist(this.dentist.id, this.dentistForm.value).then(
+      (response:any) => { this.modalEdit = false }
     );
     this.dentistEditForm.reset();
   }
@@ -136,15 +136,15 @@ export class DentistsAComponent implements OnInit {
 
     this.modalDetails = true
 
-    this.api.getDentist(id).subscribe((response) => {
-      this.dentist = response;
+    this.api.getDentist(id).then((response:any) => {
+      this.dentist = response.data;
     })
   }
 
   openEdit(id: any) {
     this.modalEdit = true
-    this.api.getDentist(id).subscribe((response) => {
-      this.dentist = response
+    this.api.getDentist(id).then((response:any) => {
+      this.dentist = response.data
       this.dentistEditForm.value.sex = this.dentist.person.sex
     })
     
@@ -152,14 +152,14 @@ export class DentistsAComponent implements OnInit {
 
   openDelete(id: any) {
     this.modalDelete = true
-    this.api.getDentist(id).subscribe((response) => {
-      this.dentist = response
+    this.api.getDentist(id).then((response:any) => {
+      this.dentist = response.data
     })
   }
 
   editDentist(id: any) {
-    this.api.updateDentist(id, this.dentistForm.value).subscribe(
-      (response) => {
+    this.api.updateDentist(id, this.dentistForm.value).then(
+      (response:any) => {
         this.dentist = null
         this.modalEdit = false
         this.getData();
@@ -168,8 +168,8 @@ export class DentistsAComponent implements OnInit {
   }
 
   deleteDentist() {
-    this.api.deleteDentist(this.dentist.id).subscribe(
-      (response) => {
+    this.api.deleteDentist(this.dentist.id).then(
+      (response:any) => {
         this.modalDelete = false
         this.getData();
       }

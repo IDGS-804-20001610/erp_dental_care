@@ -59,7 +59,7 @@ export class PatientsAComponent implements OnInit {
   }
 
   getData(){
-    this.api.getPatients().subscribe((response) => { this.data = response, console.log(response);
+    this.api.getPatients().then((response:any) => { this.data = response.data, console.log(response);
      });
   }
 
@@ -67,8 +67,8 @@ export class PatientsAComponent implements OnInit {
     this.modalAdd = true
   }
   onSubmit() {
-    this.api.insertPatient(this.patientForm.value).subscribe(
-      (response) => {this.modalAdd = false
+    this.api.insertPatient(this.patientForm.value).then(
+      (response:any) => {this.modalAdd = false
       this.patientForm.reset();
       this.getData()}
     );
@@ -82,8 +82,8 @@ export class PatientsAComponent implements OnInit {
   }
   
   onSubmitEdit() {
-    this.api.updatePatient(this.patient.id, this.patientEditForm.value).subscribe(
-      (response) => {
+    this.api.updatePatient(this.patient.id, this.patientEditForm.value).then(
+      (response:any) => {
         this.patient = null
         this.modalEdit = false
         this.getData();
@@ -96,15 +96,15 @@ export class PatientsAComponent implements OnInit {
 
     this.modalDetails = true
 
-    this.api.getPatient(id).subscribe((response) => {
-      this.patient = response;
+    this.api.getPatient(id).then((response:any) => {
+      this.patient = response.data;
     })
   }
 
   openEdit(id: any) {
     this.modalEdit = true
-    this.api.getPatient(id).subscribe((response) => {
-      this.patient = response
+    this.api.getPatient(id).then((response:any) => {
+      this.patient = response.data
     })
     if(this.patient!==null){
       this.patientEditForm.value.name = this.patient.name
@@ -121,16 +121,16 @@ export class PatientsAComponent implements OnInit {
 
   openDelete(id: any) {
     this.modalDelete = true
-    this.api.getPatient(id).subscribe((response) => {
-      this.patient = response
+    this.api.getPatient(id).then((response:any) => {
+      this.patient = response.data
     })
   }
 
 
 
   deletePatient() {
-    this.api.deletePatient(this.patient.id).subscribe(
-      (response) => {
+    this.api.deletePatient(this.patient.id).then(
+      (response:any) => {
         this.modalDelete = false
         this.getData();
       }

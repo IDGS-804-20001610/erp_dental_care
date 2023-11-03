@@ -25,34 +25,32 @@ export class LoginComponent  implements OnInit {
   }
 
   onSubmitLogin() {
-    console.log(this.loginForm.value);
-    
-    this.api.login(this.loginForm.value).subscribe((response) => {
-      console.log(response);
+    this.api.login(this.loginForm.value).then((response:any) => {
+      console.log("HALO", response.data.message.includes("User logged successfully"));
       
-      if (response['message'].includes("User logged successfully")) {
+      if (response.data.message.includes("User logged successfully")) {
 
         localStorage.setItem('isLoggedIn', "true");
-        localStorage.setItem('role', response['role']);
-        localStorage.setItem('token', response['token']);
+        localStorage.setItem('role', response.data.role);
+        localStorage.setItem('token', response.data.token);
 
-        switch (localStorage.getItem('role')) {
-          case 'ADMIN':
+        switch (localStorage.getItem('role')?.toLocaleLowerCase()) {
+          case 'admin':
             this.returnUrl = 'pages/admin/patients'
             break;
-          case 'PATIENT':
+          case 'patient':
             this.returnUrl = 'pages/patient/home'
             break;
-          case 'DENTIST':
+          case 'dentist':
             this.returnUrl = 'pages/dentist/home'
             break;
         }
         this.router.navigate([this.returnUrl]);
       } else {
-        console.log("error");
+        console.log("HALO error");
         
       }
-    }, (e)=>console.log("ERROR",e)
+    }, (e:any)=>console.log("HALO ERROR",e)
     );
     this.loginForm.reset();
   }

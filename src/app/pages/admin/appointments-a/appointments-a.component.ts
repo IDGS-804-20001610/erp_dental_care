@@ -52,8 +52,8 @@ export class AppointmentsAComponent implements OnInit {
   }
 
   getData() {
-    this.api.getAppointments().subscribe((response) => {
-      this.data = response;
+    this.api.getAppointments().then((response:any) => {
+      this.data = response.data;
     });
   }
 
@@ -63,8 +63,8 @@ export class AppointmentsAComponent implements OnInit {
 
   onSubmit() {
 
-    this.api.insertAppointment(this.appointmentForm.value).subscribe(
-      (response) => {
+    this.api.insertAppointment(this.appointmentForm.value).then(
+      (response:any) => {
         this.modalAdd = false
         this.appointmentForm.reset();
         this.getData()
@@ -80,8 +80,8 @@ export class AppointmentsAComponent implements OnInit {
   }
 
   onSubmitEdit() {
-    this.api.updateAppointment(this.appointment.id, this.appointmentForm.value).subscribe(
-      (response) => { this.modalEdit = false }
+    this.api.updateAppointment(this.appointment.id, this.appointmentForm.value).then(
+      (response:any) => { this.modalEdit = false }
     );
     this.appointmentEditForm.reset();
   }
@@ -90,29 +90,29 @@ export class AppointmentsAComponent implements OnInit {
 
     this.modalDetails = true
 
-    this.api.getAppointment(id).subscribe((response) => {
-      this.appointment = response;
+    this.api.getAppointment(id).then((response:any) => {
+      this.appointment = response.data;
     })
   }
 
   openEdit(id: any) {
     this.modalEdit = true
-    this.api.getAppointment(id).subscribe((response) => {
-      this.appointment = response
+    this.api.getAppointment(id).then((response:any) => {
+      this.appointment = response.data
     })
 
   }
 
   openDelete(id: any) {
     this.modalDelete = true
-    this.api.getAppointment(id).subscribe((response) => {
-      this.appointment = response
+    this.api.getAppointment(id).then((response:any) => {
+      this.appointment = response.data
     })
   }
 
   editAppointment(id: any) {
-    this.api.updateAppointment(id, this.appointmentForm.value).subscribe(
-      (response) => {
+    this.api.updateAppointment(id, this.appointmentForm.value).then(
+      (response:any) => {
         this.appointment = null
         this.modalEdit = false
         this.getData();
@@ -121,8 +121,8 @@ export class AppointmentsAComponent implements OnInit {
   }
 
   deleteAppointment() {
-    this.api.deleteAppointment(this.appointment.id).subscribe(
-      (response) => {
+    this.api.deleteAppointment(this.appointment.id).then(
+      (response:any) => {
         this.modalDelete = false
         this.getData();
       }
